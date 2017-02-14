@@ -13,7 +13,7 @@ module.exports = {
         ]
     },*/
 	output: {
-		filename : 'bundel.js',
+		filename : 'bundle.js',
 		path: 'public'
 	},
 	module: {
