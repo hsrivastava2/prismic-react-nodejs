@@ -10,7 +10,7 @@
   "keywords": [
     "prismic"
   ],
-  "author": "manoj kumar",
+  "author": "harshit",
   "license": "ISC",
   "dependencies": {
     "babel-core": "^6.18.2",
@@ -23,5 +23,16 @@
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "webpack": "^2.2.1"
+  },
+  "devDependencies": {
+    "css-loader": "^0.26.1",
+    "extract-text-webpack-plugin": "^2.0.0-rc.3",
+    "http-server": "^0.8.0",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.0",
+    "style-loader": "^0.13.1",
+    "stylelint-webpack-plugin": "^0.6.0",
+    "webpack": "^2.2.1",
+    "webpack-dev-server": "^2.3.0"
   }
 }

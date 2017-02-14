@@ -1,5 +1,6 @@
 var React = require('react');
 module.exports = React.createClass({
+	
 	getInitialState() {  //returns an Object of initial states.
 		return { prismic: null };
 	},
@@ -16,7 +17,7 @@ module.exports = React.createClass({
             return (
                 <div key={key} className="blog-post" data-wio-id="WCGBeigAAH9tBjVd">						
 					<h2>
-						<a href={'/blog/' + post.uid}>{post.postTitle}</a>
+						<a href={"/blog/" + post.uid}>{post.postTitle}</a>
 					</h2>
 					<p className="blog-post-meta">
 						<span className="created-at"></span>

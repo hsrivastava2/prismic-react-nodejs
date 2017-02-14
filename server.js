@@ -29,35 +29,6 @@ prismic.init(configuration);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-/**
-* Route for blog posts
-*/
-app.get('/blog/:uid', (req, res) => {
-	// Define the uid from the url
-	var uid = req.params.uid;
-	var p = prismic.withContext(req, res);
-	// Query the post by its uid
-	p.getByUID('post', uid, function (err, post) {
-		if(post) {
-			// If a document is returned, render the post
-			console.log('##################');
-			console.log(post.getFirstParagraph().text);
-			console.log('##################');
-			var blogpost = {
-				postTitle: post.getText('post.title'),
-				postDesc: post.getFirstParagraph().text
-			};
-			var html = ReactDOMServer.renderToString(
-				React.createElement(postComponent, blogpost) 
-			);
-			res.render('post', { ReactComponent: html, props: JSON.stringify(post), post: post });
-		} else {
-		  // Else give an error
-		  res.status(404).send(err);
-		}
-	});
-});
-
 
 // Routing
 app.get('/', function(request, response) {
@@ -95,6 +66,37 @@ app.get('/', function(request, response) {
 		});	
 	});
 });
+
+/**
+* Route for blog posts
+*/
+app.get('/blog/:uid', (req, res) => {
+	// Define the uid from the url
+	var uid = req.params.uid;
+	var p = prismic.withContext(req, res);
+	// Query the post by its uid
+	p.getByUID('post', uid, function (err, post) {
+		if(post) {
+			// If a document is returned, render the post
+			console.log('##################');
+			console.log(post);
+			console.log('##################');
+			var blogpost = {
+				postTitle: post.getText('post.title'),
+				postDesc: post.getFirstParagraph().text
+			};
+			var html = ReactDOMServer.renderToString(
+				React.createElement(postComponent, blogpost) 
+			);
+			res.render('post', { ReactComponent: html, props: JSON.stringify(post), post: post });
+		} else {
+		  // Else give an error
+		  res.status(404).send(err);
+		}
+	});
+});
+
+
 // Start Server
 var PORT  = 5000;
 app.listen(PORT, function() {
