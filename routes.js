@@ -1,18 +1,19 @@
-
 module.exports=function(app, prismic) {
 
 	// React
 	var React = require('react');
 	var ReactDOMServer = require('react-dom/server');
-	var Component = require('./component.jsx');
-	var postComponent = require('./post.jsx');
+	var Component = require('./views/react-components/component.jsx');
+	var postComponent = require('./views/react-components/post.jsx');
 
-	// Routing
-	app.get('/', function(request, response) {
-		var p = prismic.withContext(request, response);
+	/**
+	* Route for homepage
+	*/
+	app.get('/', function(req, res) {
+		var p = prismic.withContext(req, res);
 		
 		p.queryFirst('[[:d = at(document.type, "bloghome")]]', function (err, bloghome) {
-			var page = request.params.p || '1';
+			var page = req.params.p || '1';
 			var options = {
 				'page' : page,
 				'orderings' :'[my.post.date desc]'
@@ -39,7 +40,7 @@ module.exports=function(app, prismic) {
 				var html = ReactDOMServer.renderToString(
 					React.createElement(Component, props) 
 				);
-				response.render('index', { ReactComponent: html, props: JSON.stringify(props) });
+				res.render('index', { ReactComponent: html, props: JSON.stringify(props) });
 			});	
 		});
 	});
@@ -55,9 +56,6 @@ module.exports=function(app, prismic) {
 		p.getByUID('post', uid, function (err, post) {
 			if(post) {
 				// If a document is returned, render the post
-				console.log('##################');
-				console.log(post);
-				console.log('##################');
 				var blogpost = {
 					postTitle: post.getText('post.title'),
 					postDesc: post.getFirstParagraph().text

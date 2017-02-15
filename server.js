@@ -21,7 +21,7 @@ var prismic = require('express-prismic').Prismic;
 var configuration = require('./prismic-configuration').Configuration;
 prismic.init(configuration);
 
-//ROUTES
+// ROUTES
 var routes = require('./routes'); 
 routes(app, prismic);
 
