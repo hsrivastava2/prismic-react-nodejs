@@ -21,9 +21,16 @@ var prismic = require('express-prismic').Prismic;
 var configuration = require('./prismic-configuration').Configuration;
 prismic.init(configuration);
 
-// ROUTES
-var routes = require('./routes'); 
-routes(app, prismic);
+// EXPRESS ROUTES
+//var expressRoutes = require('./express-routes'); 
+//expressRoutes(app, prismic);
+
+// NODE ROUTES
+var nodeRoutes = require('./node-routes'); 
+nodeRoutes(app);
+
+
+
 
 // Start Server
 var PORT  = 5000;
